@@ -3,5 +3,23 @@
 {% block contenido %}
 
 
+</div>    
+<table class="table table-bordered col-12 text-center mx-auto  ">
+    <thead class="bg-dark text-white">
+        <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in Publicacion %}
+        <tr>
+            <td>{{ i.nombre }}</td>
+            <td>{{ i.descripcion }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
 
 {% endblock contenido %}
