@@ -25,22 +25,21 @@ def publicacion_lista(request):
     lista = Publicacion.objects.all()
     return render(request,'BlogApp/publicacion_list.html', {"lista": lista})
 
-def buscar(request):
-    return render(request,'BlogApp/buscar.html')
+def buscadaPublicacion(request):
+    return render(request,'BlogApp/busqueda.html')
 
-def buscarPublicacion(request):
+
+def buscar(request):
     
-    busqueda = request.GET.get("busqueda")
-    publicacion = Publicacion.objects.all()
+    if(request.method == 'GET'):
+        nombre = request.GET["nombre"]
+        publicaciones = Publicacion.objects.filter(nombre=nombre)
+        return render(request, 'BlogApp/resultadobusqueda.html', {'publicaciones':publicaciones , 'nombre':nombre} )
     
-    if busqueda:
-        publicacion = Publicacion.objects.filter(
-            Q(nombre__icontains = busqueda) |
-            Q(fechaCreacion__icontains = busqueda) |
-            Q(descripcion__icontains = busqueda)
-        ).distinct()
-    
-    return render(request,'BlogApp/buscar.html', {"publicacion": publicacion})
+    else:
+        respuesta = "No enviaste datos"
+        
+        return HttpResponse(respuesta)
 
 
 def login (request):
@@ -89,7 +88,7 @@ class CategoriaDetalle(DetailView):
 
 class CategoriaCreacion(CreateView):
     model = Categorias
-    success_url = "publicaciones/"
+    success_url = "categorias/"
     fields=['nombreCategoria', 'tipoCategoria']
 
 
@@ -115,7 +114,7 @@ class LectorDetalle(DetailView):
 
 class LectorCreacion(CreateView):
     model = Lector
-    success_url = "publicaciones/"
+    success_url = "lectores/"
     fields=['nombre','email', 'fechaIngreso']
 
 

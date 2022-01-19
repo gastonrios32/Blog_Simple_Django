@@ -1,14 +1,13 @@
 from django.urls import path
 from BlogApp import views
-from .views import buscarPublicacion
 
 urlpatterns = [
     path('',views.index, name="Index"),
     path('lectores/',views.lectores_lista, name="Lectores"),
-    path('buscar/',buscarPublicacion, name="Buscar"),  
+    path('busquedaPublicacion/',views.buscadaPublicacion, name="busquedaPublicacion"),    
+    path('buscar/',views.buscar, name="Buscar"),  
     path('categorias/',views.categorias_lista, name="Categoria"),
-    path('publicaciones/',views.publicacion_lista, name="Publicaciones"),           
-    #path('nuevaPublicacion/',views.nuevaPublicacion, name="NuevaPublicacion"),
+    path('publicaciones/',views.publicacion_lista, name="Publicaciones"),      
     path('login/',views.login, name="Login" ),
     
     path('listaPublicaciones',views.PublicacionList.as_view(), name="lista" ), 
@@ -20,8 +19,8 @@ urlpatterns = [
     path('listaCategoria',views.CategoriaList.as_view(), name="listaCategoria" ), 
     path('detalleCategoria/<pk>/',views.CategoriaDetalle.as_view(), name="detailCategoria" ), 
     path('NuevaCategoria',views.CategoriaCreacion.as_view(), name="newCategoria" ), 
-    path('actualizaPublicaciones/<pk>/',views.CategoriaUpdate.as_view(), name="editCategoria" ), 
-    path('eliminaPublicaciones/<pk>/',views.CategoriaDelete.as_view(), name="deleteCategoria" ), 
+    path('actualizaCategoria/<pk>/',views.CategoriaUpdate.as_view(), name="editCategoria" ), 
+    path('eliminaCategoria/<pk>/',views.CategoriaDelete.as_view(), name="deleteCategoria" ), 
 
     path('listaLector',views.LectorList.as_view(), name="listaLector" ), 
     path('detalleLector/<pk>/',views.LectorDetalle.as_view(), name="detailLector" ), 

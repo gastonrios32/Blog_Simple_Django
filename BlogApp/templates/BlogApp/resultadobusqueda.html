@@ -2,20 +2,12 @@
 {% load static %}
 {% block contenido %}
 
-<nav class="navbar navbar-light bg-light ">
-    <div class="container-fluid ">
-        <form class="d-flex" action="/buscar/" method="GET" >
-        <input class="form-control   me-3 " type="text" name="buscar" value = "{{request.GET.buscar}}" placeholder="Buscar.... " aria-label="Search" >
-        <input class="btn btn-outline-success" type="submit" value= "buscar"></input>
-    </form>
-    </div>
-
-</nav>
-
 <div class="container col-12 h-100 text-center text-lg-start my-auto" style="background-color: rgba(245, 245, 245, 0.966);">
     <div class="abs-center ">
         <form action="#" class="border p-3 form">
             <div class="form-group">
+                <p>Estamos buscando la Publicacion: {{nombre}}</p>
+                {% if publicaciones %}
                 <table class="table table-bordered col-12 text-center ">
                     <thead class="bg-dark text-white">
                         <tr>
@@ -24,7 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for Publicacion in publicacion %}
+                        {% for Publicacion in publicaciones %}
                         <tr>
                             <td>{{ Publicacion.nombre }}</td>
                             <td>{{ Publicacion.descripcion }}</td>
@@ -32,12 +24,11 @@
                         {% endfor %}
                     </tbody>
                 </table>
-
+                {% endif %}
                     
             </div>
         </form>       
     </div>
 </div>    
-    
 
 {% endblock contenido %}

@@ -13,9 +13,9 @@
                                     CATEGORIA: {{categoria.nombreCategoria}}
                                     </p>
                                     <p>
-                                            <a href="{% url 'detailCategoria' Publicacion.id %}">Ver</a>  
-                                            <a href="{% url 'editCategoria' Publicacion.id %}">Editar</a> 
-                                            <a href="{% url 'deleteCategoria' Publicacion.id %}">Borrar</a>
+                                            <a href="{% url 'detailCategoria' categoria.id %}">Ver</a>  
+                                            <a href="{% url 'editCategoria' categoria.id %}">Editar</a> 
+                                            <a href="{% url 'deleteCategoria' categoria.id %}">Borrar</a>
                                     </p>
                             </li>
 
