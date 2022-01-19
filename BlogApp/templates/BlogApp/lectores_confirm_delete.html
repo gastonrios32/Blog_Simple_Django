@@ -4,16 +4,13 @@
 
 <div class="container col-lg-6 h-100 text-center text-lg-start my-auto" style="background-color: rgba(245, 245, 245, 0.966);">
     <div class="abs-center ">
-    <form action="#" class="border p-3 form">
         <div class="form-group">
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="ENVIAR" />
-            </form>
-        </FORM>       
+            <form method="POST">{% csrf_token %}
+                ¿ESTAS SEGURO QUE DESEAS BORRAR AL USUARIO : "{{ object }}" ?
+                <input type="submit" value="CONFIRMAR" />
+            </form>   
         </div>
     </div>
-</div> 
+</div>    
 
 {% endblock contenido %}
