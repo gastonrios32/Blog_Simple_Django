@@ -5,13 +5,12 @@
 <div class="container col-lg-6 h-100 text-center text-lg-start my-auto" style="background-color: rgba(245, 245, 245, 0.966);">
     <div class="abs-center ">
         <div class="form-group">
-            <p>Nombre: <i>{{ categoria.nombreCategoria }}</i></p>
-            <p>Tipo de Categoria: <i>{{ categoria.tipoCategoria }}</i></p>
-            <p>
-            <a href="{% url 'Categoria' %}">Regresar</a>
-            </p>      
+            <form method="POST">{% csrf_token %}
+                ¿ESTAS SEGURO QUE DESEAS BORRAR AL USUARIO : "{{ object }}" ?
+                <input type="submit" value="CONFIRMAR" />
+            </form>   
         </div>
     </div>
-</div>  
+</div>    
 
 {% endblock contenido %}

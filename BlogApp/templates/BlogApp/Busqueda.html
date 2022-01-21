@@ -2,15 +2,13 @@
 {% load static %}
 {% block contenido %}
 
-<nav class="navbar navbar-light bg-light ">
-    <div class="container-fluid ">
-        <form class="d-flex" action="/buscar/" method="GET" >
+<div class="container-fluid bg-light col-lg-10">
+    <form class="d-flex" action="/buscar/" method="GET" >
         <input class="form-control   me-3 " type="text" name="nombre" id="nombre" placeholder="Buscar.... " aria-label="Search" >
         <input class="btn btn-outline-success" type="submit" value= "buscar"></input>
     </form>
-    </div>
+</div>
 
-</nav>
 
 
 

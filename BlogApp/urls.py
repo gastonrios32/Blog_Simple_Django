@@ -4,6 +4,7 @@ from BlogApp import views
 urlpatterns = [
     path('',views.index, name="Index"),
     path('lectores/',views.lectores_lista, name="Lectores"),
+    path('Autores/',views.autores_lista, name="Autores"),    
     path('busquedaPublicacion/',views.buscadaPublicacion, name="busquedaPublicacion"),    
     path('buscar/',views.buscar, name="Buscar"),  
     path('categorias/',views.categorias_lista, name="Categoria"),
@@ -17,7 +18,7 @@ urlpatterns = [
     path('eliminaPublicaciones/<pk>/',views.PublicacionDelete.as_view(), name="delete" ),
 
     path('listaCategoria',views.CategoriaList.as_view(), name="listaCategoria" ), 
-    path('detalleCategoria/<pk>/',views.CategoriaDetalle.as_view(), name="detailCategoria" ), 
+    path('detalleCategorias/<pk>/',views.CategoriaDetalle.as_view(), name="detailCategoria" ), 
     path('NuevaCategoria',views.CategoriaCreacion.as_view(), name="newCategoria" ), 
     path('actualizaCategoria/<pk>/',views.CategoriaUpdate.as_view(), name="editCategoria" ), 
     path('eliminaCategoria/<pk>/',views.CategoriaDelete.as_view(), name="deleteCategoria" ), 
@@ -26,5 +27,11 @@ urlpatterns = [
     path('detalleLector/<pk>/',views.LectorDetalle.as_view(), name="detailLector" ), 
     path('NuevoLector',views.LectorCreacion.as_view(), name="newLector" ), 
     path('actualizaLector/<pk>/',views.LectorUpdate.as_view(), name="editLector" ), 
-    path('eliminaLector/<pk>/',views.LectorDelete.as_view(), name="deleteLector" ),                   
+    path('eliminaLector/<pk>/',views.LectorDelete.as_view(), name="deleteLector" ),  
+    
+    path('listaAutores',views.AutoresList.as_view(), name="listaAutores" ), 
+    path('detalleAutores/<pk>/',views.AutoresDetalle.as_view(), name="detailAutor" ), 
+    path('NuevoAutor',views.AutoresCreacion.as_view(), name="newAutor" ), 
+    path('actualizaAutores/<pk>/',views.AutoresUpdate.as_view(), name="editAutor" ), 
+    path('eliminaAutores/<pk>/',views.AutoresDelete.as_view(), name="deleteAutor" ),                        
 ]

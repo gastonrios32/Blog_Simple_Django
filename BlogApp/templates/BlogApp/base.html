@@ -23,18 +23,18 @@
             <div class="container"  style="background-color: #263238;">
                 <a class="navbar-brand text-light"  href="{% url 'Index' %}">Inicio</a>
                 <a class="navbar-brand text-light" href="{% url 'Categoria' %}">Categorias</a>              
-                <a class="navbar-brand text-light" href="{% url 'Lectores' %}">Lectores</a>
+                <a class="navbar-brand text-light" href="{% url 'Autores' %}">Autores</a>
                 <a class="navbar-brand text-light" href="{% url 'Publicaciones' %}">Publicaciones</a>
                 <a class="navbar-brand text-light" href="{% url 'busquedaPublicacion' %}">Buscar</a>
 
             </div>
 
         </nav>
-
+<div class="bg-light ">
 {% block contenido %}
     
 {% endblock contenido %}
-    
+</div>    
 
         <!-- Footer-->
         <footer class="footer bg-light">

@@ -19,3 +19,11 @@ class Categorias(models.Model):
     tipoCategoria=models.CharField( max_length=50)
     def __str__(self):
         return f'{self.nombreCategoria} - {self.tipoCategoria} -'    
+    
+class Autores(models.Model):
+    nombre= models.CharField( max_length=50)
+    fechaNacimiento=models.DateField( auto_now=False, auto_now_add=False)
+    email=models.CharField( max_length=50)
+    GeneroAutor=models.CharField( max_length=50)
+    def __str__(self):
+            return f'{self.nombre} - {self.GeneroAutor}'    

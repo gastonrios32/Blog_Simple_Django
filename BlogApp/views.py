@@ -18,6 +18,11 @@ def lectores_lista (request):
     lectores= Lector.objects.all()
     return render(request,'BlogApp/lectores_list.html', {"lectores":lectores})
 
+def autores_lista (request):
+    
+    listaautores= Autores.objects.all()
+    return render(request,'BlogApp/Autores_list.html', {"listaautores":listaautores})
+
 #def nuevaPublicacion(request):
  #   return render(request,'BlogApp/nuevaPublicacion.html')
 
@@ -83,7 +88,7 @@ class CategoriaList(ListView):
 
 class CategoriaDetalle(DetailView):
     model = Categorias
-    template_name = "BlogApp/detalleCategoria.html"
+    template_name = "BlogApp/detalleCategorias.html"
 
 
 class CategoriaCreacion(CreateView):
@@ -127,3 +132,29 @@ class LectorDelete(DeleteView):
     model = Lector
     success_url = "../../"
     template_name = 'BlogApp/lectores_confirm_delete.html'
+
+class AutoresList(ListView):
+    model = Autores
+    template_name = "BlogApp/Autores_list.html"
+
+
+class AutoresDetalle(DetailView):
+    model = Autores
+    template_name = "BlogApp/detalleAutores.html"
+
+
+class AutoresCreacion(CreateView):
+    model = Autores
+    success_url = "Autores/"
+    fields=['nombre','fechaNacimiento', 'email', 'GeneroAutor']
+
+
+class AutoresUpdate(UpdateView):
+    model = Autores
+    success_url = "../../"
+    fields=['nombre','fechaNacimiento', 'email', 'GeneroAutor']
+
+class AutoresDelete(DeleteView):
+    model = Autores
+    success_url = "../../"
+    template_name = 'BlogApp/Autores_confirm_delete.html'
