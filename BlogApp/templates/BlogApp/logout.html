@@ -1,0 +1,15 @@
+{% extends 'BlogApp/base.html' %}
+{% load static %}
+{% block contenido %}
+
+<div class="container col-lg-6 h-100 text-center text-lg-start my-auto" style="background-color: rgba(245, 245, 245, 0.966);">
+    <div class="abs-center ">
+        <br>
+        <h3>Te has Deslogueado</h3>
+        <br>
+        <br>
+        <a class="btn btn-primary btn-sm" href="{% url 'Index' %}">Volver al Inicio</a>
+    </div>
+</div> 
+
+{% endblock contenido %}

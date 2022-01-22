@@ -1,5 +1,6 @@
 from django.urls import path
 from BlogApp import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('',views.index, name="Index"),
@@ -9,7 +10,10 @@ urlpatterns = [
     path('buscar/',views.buscar, name="Buscar"),  
     path('categorias/',views.categorias_lista, name="Categoria"),
     path('publicaciones/',views.publicacion_lista, name="Publicaciones"),      
-    path('login/',views.login, name="Login" ),
+    path('login',views.login_request, name="Login" ),
+    path('register/',views.register, name="register" ),    
+    path('logout',LogoutView.as_view(template_name = 'BlogApp/logout.html'), name="Logout" ),        
+    
     
     path('listaPublicaciones',views.PublicacionList.as_view(), name="lista" ), 
     path('detallePublicacion/<pk>/',views.PublicacionDetalle.as_view(), name="detail" ), 
