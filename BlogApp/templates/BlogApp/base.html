@@ -5,8 +5,8 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        <meta name="description" content="Trabajo integrador Para CoderHouse" />
+        <meta name="author" content="Gaston Rios" />
         <title>El Blog </title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'BlogApp/assets/favicon.ico' %}" />
@@ -26,7 +26,29 @@
                 <a class="navbar-brand text-light" href="{% url 'Autores' %}">Autores</a>
                 <a class="navbar-brand text-light" href="{% url 'Publicaciones' %}">Publicaciones</a>
                 <a class="navbar-brand text-light" href="{% url 'busquedaPublicacion' %}">Buscar</a>
+                {% if not request.user.is_authenticated %}
                 <a class="btn btn-primary" href="{% url 'Login' %}">INICIAR SESION</a>
+                {% endif %}
+                {% if request.user.is_authenticated %}
+            <div class="dropdown">
+                    
+                    {% if url %}
+                    <img height="40px" src="{{url}}" alt="avatar" >  
+                    {% endif %}
+                        
+
+
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        Bienvenido , {{user.username}}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                    <li><a class="dropdown-item" href="{% url 'EditarPerfil' %}">Editar Usuario</a></li>
+                    <li><a class="dropdown-item" href="agregarAvatar">Agregar Avatar</a></li> 
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'Logout' %}">Desloguearse</a></li>
+                    </ul>
+            </div>
+                {% endif %}
 
 
             </div>
@@ -44,7 +66,6 @@
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                         <ul class="list-inline mb-2">
-                            <li class="list-inline-item"><a href="{% url 'Logout' %}">Desloguearse</a></li>
                             <li class="list-inline-item"><a href="#!">About</a></li>
                             <li class="list-inline-item">⋅</li>
                             <li class="list-inline-item"><a href="https://www.linkedin.com/in/gastonrios32/">Contact</a></li>

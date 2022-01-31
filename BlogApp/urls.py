@@ -12,7 +12,9 @@ urlpatterns = [
     path('publicaciones/',views.publicacion_lista, name="Publicaciones"),      
     path('login',views.login_request, name="Login" ),
     path('register/',views.register, name="register" ),    
-    path('logout',LogoutView.as_view(template_name = 'BlogApp/logout.html'), name="Logout" ),        
+    path('logout',LogoutView.as_view(template_name = 'BlogApp/logout.html'), name="Logout" ),
+    path('editarPerfil/',views.editarPerfil, name="EditarPerfil" ),
+    path('agregarAvatar/',views.agregarAvatar, name="agregarAvatar" ),                 
     
     
     path('listaPublicaciones',views.PublicacionList.as_view(), name="lista" ), 

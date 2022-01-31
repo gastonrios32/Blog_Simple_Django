@@ -1,20 +1,24 @@
-from ast import Pass
 from django.http.response import HttpResponse
 from django.shortcuts import  render
 from django.http import HttpResponse
-from django.db.models import Q
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView,DeleteView,UpdateView
 from .models import *
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from .forms import UserEditForm,AvatarFormulario
 
-
+@login_required
 def index (request):
-    return render(request,'BlogApp/index.html')
+    publicaciones = Publicacion.objects.all()
+    ultimaPublicacion =  reversed(publicaciones)
+    
+    avatar  = Avatar.objects.filter(user=request.user.id)
+    
+    return render(request,'BlogApp/index.html', {"ultimaPublicacion": ultimaPublicacion, "url": avatar[0].imagen.url })
 
 @login_required
 def lectores_lista (request):
@@ -24,26 +28,32 @@ def lectores_lista (request):
 
 @login_required
 def autores_lista (request):
-    
+    avatar  = Avatar.objects.filter(user=request.user.id )
     listaautores= Autores.objects.all()
-    return render(request,'BlogApp/Autores_list.html', {"listaautores":listaautores})
+    return render(request,'BlogApp/Autores_list.html', {"listaautores":listaautores, "url": avatar[0].imagen.url})
 
 @login_required
 def publicacion_lista(request):
+    avatar  = Avatar.objects.filter(user=request.user.id )
     lista = Publicacion.objects.all()
-    return render(request,'BlogApp/publicacion_list.html', {"lista": lista})
+    return render(request,'BlogApp/publicacion_list.html', {"lista": lista,"url": avatar[0].imagen.url})
 
 @login_required
 def buscadaPublicacion(request):
-    return render(request,'BlogApp/busqueda.html')
+    
+    avatar  = Avatar.objects.filter(user=request.user.id )
+    
+    return render(request,'BlogApp/busqueda.html', {"url": avatar[0].imagen.url} )
 
 @login_required
 def buscar(request):
     
+    avatar  = Avatar.objects.filter(user=request.user.id )
+    
     if(request.method == 'GET'):
         nombre = request.GET["nombre"]
         publicaciones = Publicacion.objects.filter(nombre=nombre)
-        return render(request, 'BlogApp/resultadobusqueda.html', {'publicaciones':publicaciones , 'nombre':nombre} )
+        return render(request, 'BlogApp/resultadobusqueda.html', {'publicaciones':publicaciones , 'nombre':nombre, "url": avatar[0].imagen.url} )
     
     else:
         respuesta = "No enviaste datos"
@@ -53,8 +63,9 @@ def buscar(request):
 
 @login_required
 def categorias_lista (request):
+    avatar  = Avatar.objects.filter(user=request.user.id )    
     categoria = Categorias.objects.all()
-    return render(request,'BlogApp/categoria_list.html', {"categoria":categoria})
+    return render(request,'BlogApp/categoria_list.html', {"categoria":categoria, "url": avatar[0].imagen.url})
 
 
 class PublicacionList(LoginRequiredMixin,ListView):
@@ -173,8 +184,10 @@ def login_request(request):
         
             if user is not None :
                 login(request, user)
+                
+                avatar  = Avatar.objects.filter(user=request.user.id)
             
-                return render(request, "BlogApp/index.html", {"mensaje" : f"Bienvenido {user.get_username()}"} )
+                return render(request, "BlogApp/index.html", {"mensaje" : f"Bienvenido {user.get_username()}","url": avatar[0].imagen.url } )
             else:
                 return render (request, "BlogApp/index.html", {"mensaje" : f"Usuario o Contraseña Incorrecta"} )
         else:
@@ -194,3 +207,91 @@ def register (request):
     else:
         form= UserCreationForm()
         return render(request,'BlogApp/register.html',{"form":form})
+
+
+def editarPerfil(request):
+    
+    usuario = request.user
+    
+    if request.method == 'POST':
+        miform= UserEditForm(request.POST)
+        if miform.is_valid():
+            
+            informacion = miform.cleaned_data
+            
+            usuario.email= informacion['email']
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
+            usuario.last_name = informacion['last_name']
+            usuario.first_name = informacion ['first_name']
+            usuario.save()
+            
+            return render (request, "BlogApp/index.html", {"mensaje" :"Usuario Modificado  "})
+    else:
+        miform = UserEditForm(initial={'email':usuario.email,'first_name':usuario.first_name, 'last_name': usuario.last_name })
+        
+    return render (request, "BlogApp/editarPerfil.html", {"miform":miform,"usuario":usuario})
+            
+            
+# @login_required
+# def agregarAvatar(request):
+    
+#     avatar = request.user
+    
+#     if request.POST == 'POST':
+#         miformulario = AvatarFormulario ( request.POST, request.FILES )
+        
+#         if miformulario.isvalid():
+#             informacion = miformulario.cleaned_data
+            
+#             avatar.imagen= informacion['imagen']
+#             # avatar.password1 = informacion['password1']
+#             # avatar.password2 = informacion['password2']
+            
+#             avatar.save()
+#             return render (request, "BlogApp/index.html", {"mensaje" :" Avatar Asignado "})
+#     else:
+#         miformulario = AvatarFormulario()
+    
+#     return render (request, "BlogApp/agregarAvatar.html", {"miformulario":miformulario})
+
+
+# @login_required
+# def agregarAvatar(request):
+#     if request.POST == 'POST':
+#         miformulario = AvatarFormulario ( request.POST, request.FILES )
+        
+#         if miformulario.isvalid():
+            
+#             informacion = miformulario.cleaned_data
+            
+#             avatar = Avatar (user = informacion['user'],imagen = informacion['imagen'])
+#             # Avatar.user = User.objects.get(username = request.user)
+#             # Avatar.imagen= miformulario.cleaned_data['imagen']
+#             avatar.save()
+#             return render (request, "BlogApp/index.html", {"mensaje" :" Avatar Asignado "})
+#     else:
+#         miformulario = AvatarFormulario()
+    
+#     return render (request, "BlogApp/agregarAvatar.html", {"miformulario":miformulario})
+
+def agregarAvatar(request):
+    if request.method == 'POST':
+
+            miFormulario = AvatarFormulario(request.POST, request.FILES) #aquí mellega toda la información del html
+
+            if miFormulario.is_valid():   #Si pasó la validación de Django
+                
+                avatar = Avatar (user = request.user, imagen=miFormulario.cleaned_data['imagen']) 
+      
+                avatar.save()
+
+                return render (request, "BlogApp/index.html", {"mensaje" :" Avatar Asignado "})
+
+    else: 
+
+            miFormulario= AvatarFormulario() #Formulario vacio para construir el html
+
+    return render (request, "BlogApp/agregarAvatar.html", {"miFormulario":miFormulario})
+
+

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Lector(models.Model):
     nombre=models.CharField( max_length=50)
@@ -7,18 +8,23 @@ class Lector(models.Model):
     def __str__(self):
             return f'{self.nombre} - {self.email}'
     
+    
+class Categorias(models.Model):
+    nombreCategoria=models.CharField( max_length=50)
+    tipoCategoria=models.CharField( max_length=50)
+    def __str__(self):
+        return f'{self.nombreCategoria} - {self.tipoCategoria} -'  
+
+
 class Publicacion(models.Model):
     nombre=models.CharField( max_length=50)
     fechaCreacion=models.DateField( auto_now=False, auto_now_add=False)
     descripcion=models.CharField( max_length=500)
     def __str__(self):
         return f'{self.nombre}'    
-    
-class Categorias(models.Model):
-    nombreCategoria=models.CharField( max_length=50)
-    tipoCategoria=models.CharField( max_length=50)
-    def __str__(self):
-        return f'{self.nombreCategoria} - {self.tipoCategoria} -'    
+
+
+
     
 class Autores(models.Model):
     nombre= models.CharField( max_length=50)
@@ -26,4 +32,11 @@ class Autores(models.Model):
     email=models.CharField( max_length=50)
     GeneroAutor=models.CharField( max_length=50)
     def __str__(self):
-            return f'{self.nombre} - {self.GeneroAutor}'    
+            return f'{self.nombre} - {self.GeneroAutor}' 
+
+class Avatar(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='avatares',null=True,blank= True)
+    
+    def __str__(self):
+        return f"Imagen de : {self.user.username}"
