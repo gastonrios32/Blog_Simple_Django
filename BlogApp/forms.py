@@ -1,8 +1,10 @@
+from cProfile import label
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from ckeditor import *
 
-from .models import Avatar
+from .models import *
 
 
 class LectorFormulario(forms.Form):
@@ -13,9 +15,19 @@ class LectorFormulario(forms.Form):
 
 class PublicacionesFormulario(forms.Form):
     
-    nombre=forms.CharField( max_length=50)
+    nombre=forms.CharField( max_length=250)
     fechaCreacion=forms.DateField()
     descripcion=forms.CharField( max_length=500)
+    imagenPublicacion = forms.ImageField(required=False)  
+    contenido = RichTextField()
+    nombCategoria = forms.CharField(max_length="150")
+    nombAutor =  forms.CharField(max_length="150")
+    
+    class Meta:
+            model = Publicacion
+            fields = ['nombre','fechaCreacion', 'descripcion' ,'imagenPublicacion','contenido','nombCategoria','nombAutor']
+            help_texts = {k:"" for k in fields}
+    
 
 class CategoriasFormulario(forms.Form):
     

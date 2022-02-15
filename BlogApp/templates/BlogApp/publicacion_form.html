@@ -2,12 +2,14 @@
 {% load static %}
 {% block contenido %}
 
-<div class="container col-lg-6 h-100 text-center text-lg-start my-auto" style="background-color: rgba(245, 245, 245, 0.966);">
+<div class="container col-lg-8 h-100 text-center text-lg-start my-auto" style="background-color: rgba(245, 245, 245, 0.966);">
     <div class="abs-center ">
-                <form method="POST">
+                <form method="POST" enctype='multipart/form-data'>
                     {% csrf_token %}
+                    {{form.media}}  
                     {{ form.as_p }}
-                    <input type="submit" value="ENVIAR" />
+              
+                    <input class="btn btn-secondary" type="submit" value="ENVIAR" />
                 </form>
     </div>
 </div> 

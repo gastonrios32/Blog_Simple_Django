@@ -1,0 +1,46 @@
+{% extends 'BlogApp/base.html' %}
+{% load static %}
+{% block contenido %}
+
+<div class="container col-lg-12 h-100 text-center text-lg-start my-auto" style="background-color: rgba(245, 245, 245, 0.966);">
+    <div class="abs-center ">
+        <form action="#" class="border p-3 form">
+            <center><h3>Sobre mi </h3></center>
+                <div >
+                    <img height="200px" class="rounded"  src="{% static 'BlogApp\img\Foto_personal.jpg' %}" hspace="5" vspace="5" style="float: left; " />
+                    <div class="border p-3 form" style="background-color: rgba(195, 207, 214, 0.966);">
+                        <p>
+                            Mi nombre es Gaston Rios soy uriundo de Buenos Aires, Argentina <br>
+                            Actualmente me desempeño como desarrollador en SQL Server / Explotacion de datos para una empresa que gestiona la cobranza de clientes como Personal , Flow , Telecom , Coppel, entre otros .<br>
+                            Aprendendiendo Python me encuentro en busqueda de ampliar mis conocimientos para desarrollarme en Analisis de datos y Back-end .<br>
+                            Tambien cuento con conocimiento en redes , soporte tecnico N1 , reporteria en Excel y Tableau, programacion en C y Visual Basic .NET
+                            
+                        </p>
+                    </div>
+                </div>
+                <div style="clear: both;" ></div>
+            <br>
+                
+            <center><h3>Sobre el proyecto</h3></center>
+            <br>
+                <div class="border p-3 form" style="background-color: rgba(195, 207, 214, 0.966);">
+                    <img height="160px" class="rounded"  src="{% static 'BlogApp\img\Blog.png' %}" hspace="5" vspace="5" style="float: right; " />
+                        
+                    <p>
+                        Proyecto es un blog basico desarrollado sobre Django utilizando bootstrap 5 y SQL Lite como base de datos  .<br>
+                        El mismo cuenta con una relacion entre los modelos relacionando cada publicacion con un autor y una categoria .<br>
+                        Además este cuenta con un sistema de ABM de usuarios con la posibilidad de en un futuro implementar dos aplicaciones<br>
+                        diferentes para usuarios del administradores y usuarios normales.
+                        <br>
+                        <br>
+                    </p>
+                        <br>
+                </div>
+
+            <br>
+            <p>Fecha : 14/02/2022</p>
+        </form>       
+    </div>
+</div>    
+{% endblock contenido %}
+

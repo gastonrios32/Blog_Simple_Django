@@ -1,28 +1,71 @@
 {% extends 'BlogApp/base.html' %}
 {% load static %}
+
+
 {% block contenido %}
 
-<div class="container col-lg-6 h-100 text-center text-lg-start my-auto" style="background-color: rgba(245, 245, 245, 0.966);">
+
+<div class="container col-lg-8 h-100 text-center text-lg-start my-auto" style="background-color: rgba(245, 245, 245, 0.966);">
     <div class="abs-center ">
         <form action="#" class="border p-3 form">
             <div class="form-group">
-                <H2>ULTIMAS PUBLICACIONES</H2>
                     <ul>
                         {% for Publicacion  in lista %}
-                            <li>
+                        <center><h2>{{Publicacion.nombre}}</h2></center>
+                         
                                     <p>
-                                    Publicacion: {{Publicacion.nombre}}
+                                    
+                                    {% if Publicacion.imagenPublicacion %}
+                                        <center><img height="360px" class="rounded" src="{{Publicacion.imagenPublicacion.url}}" alt="imagen"></center>
+                                        {% else %}
+                                        <center><img height="360px" class="rounded" src="{% static 'BlogApp/img/SinImagen.jpg' %}" alt="imagen"></center>
+                                    {% endif %}
+                                    
+                                        
+
+                                    <br>
+
+                                    <br>
+                                    {{Publicacion.descripcion}}
+                                    <br>
+                                    <br>
+                                    Categoria :{{Publicacion.nombCategoria.nombreCategoria}}
+                                    <br>
+                                    <br>
+                                    Autor :{{Publicacion.nombAutor}}
+                                    <br>
+                                    <br>                                    
                                     </p>
                                     <p>
-                                            <a href="{% url 'detail' Publicacion.id %}">Ver</a>  
-                                            <a href="{% url 'edit' Publicacion.id %}">Editar</a> 
-                                            <a href="{% url 'delete' Publicacion.id %}">Borrar</a>
+                                            <a class="btn btn-primary" href="{% url 'detail' Publicacion.id %}">Leer Mas</a>  
+                                            <a class="btn btn-primary" href="{% url 'edit' Publicacion.id %}">Editar</a> 
+                                            <a class="btn btn-primary" href="{% url 'delete' Publicacion.id %}">Borrar</a>
                                     </p>
-                            </li>
+                          
 
                         {% endfor %}
-                        <a href="{% url 'new'  %}">Nuevo</a> 
+                        <div class="d-grid gap-2">
+                            <a class="btn btn-primary btn-sm" href="{% url 'new'  %}">Nuevo</a> 
+                        </div>
                     </ul>
+                </div>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; Primera</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">Previa</a>
+                        {% endif %}
+        
+                        <span class="current">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                        </span>
+        
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">Siguente</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">Ultima &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
             </div>
         </form>       
     </div>

@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'BlogApp',
+    'ckeditor',
+    
 ]
 
 MIDDLEWARE = [
@@ -78,7 +80,7 @@ WSGI_APPLICATION = 'trabajointegrador.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'Blog',
+        'NAME': BASE_DIR / 'Blog.db',
     }
 }
 
@@ -117,6 +119,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+CKEDITOR_JQUERY_URL ='https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'
+
 STATIC_URL = 'static/'
 
 # Default primary key field type
@@ -130,3 +134,8 @@ LOGIN_URL = '/login'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '76f8710530c687'
+EMAIL_HOST_PASSWORD = '6c6ad58d8146e6'
+EMAIL_PORT = '2525'

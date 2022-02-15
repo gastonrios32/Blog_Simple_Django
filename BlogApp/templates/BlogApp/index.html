@@ -2,43 +2,19 @@
 {% load static %}
 {% block contenido %}
 
-<div class="container abs-center  ">
+<div class="container col-lg-12 h-100 text-center text-lg-start my-auto">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2 ">
+        <div class="col-md-12 col-md-offset-2 ">
 
-            {% for Publicacion  in ultimaPublicacion %}
-            <li>
-                    <p>
-                    Publicacion: {{Publicacion.nombre}}
-                    </p>
-                    <p>
-                            <a href="{% url 'detail' Publicacion.id %}">Ver</a>  
-                            <a href="{% url 'edit' Publicacion.id %}">Editar</a> 
-                            <a href="{% url 'delete' Publicacion.id %}">Borrar</a>
-                    </p>
-            </li>
-
-        {% endfor %}
-            <h3>{{mensaje}}</h3>
-
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="https://i.postimg.cc/zGgpDq2C/pngegg-2.png" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://i.postimg.cc/KvVJy1fc/pngegg-1.png" class="d-block w-100" alt="...">
-                    </div>
-                </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+            <img  class="rounded"  src="{% static 'BlogApp\img\Portada.jpeg' %}" height="640px"  />
+            
+            
+            
+            <center><h3>{{mensaje}}</h3></center>
+            
+            
+                
+                
         </div>
     </div>
 </div>        

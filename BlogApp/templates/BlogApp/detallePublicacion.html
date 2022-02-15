@@ -7,10 +7,12 @@
     <form action="#" class="border p-3 form">
         <div class="form-group">
             <p>Titulo de la publicacion : <i>{{ publicacion.nombre }}</i></p>
-            <p>Descripcion: <i>{{ publicacion.descripcion }}</i></p>
-            <p>
-            <a href="{% url 'Publicaciones' %}">Regresar</a>
-            </p>
+            {{form.media}}
+            <p> Contenido : <i>{{ publicacion.contenido | safe }}</i></p>
+            <br>
+            <br>
+            <a class="btn btn-primary btn-sm" href="{% url 'Publicaciones' %}">Regresar</a>
+
         </FORM>       
         </div>
     </div>
