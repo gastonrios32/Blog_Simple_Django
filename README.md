@@ -1,4 +1,4 @@
-# Grupo5 + Gaston Rios
+# BLOG SIMPLE
 
 LEER : El proyecto por algun motivo se encuentra en la rama master de este repositorio
 
